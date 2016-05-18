@@ -4,6 +4,8 @@
 
 @title{multi-file-lang}
 
+source code: @url{https://github.com/AlexKnauth/multi-file-lang}
+
 @defmodule[multi-file #:lang]{
 A @hash-lang[] language for writing multiple files as one file.
 
