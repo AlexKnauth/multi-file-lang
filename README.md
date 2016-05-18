@@ -2,6 +2,8 @@ multi-file-lang [![Build Status](https://travis-ci.org/AlexKnauth/multi-file-lan
 ===
 a racket #lang for multiple files in one
 
+documentation: http://docs.racket-lang.org/multi-file-lang/index.html
+
 Example:
 ```racket
 #lang multi-file
