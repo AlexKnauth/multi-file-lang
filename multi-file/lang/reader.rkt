@@ -39,7 +39,7 @@
                     `(dynamic-require ',name #f))]
                   [else
                    (list
-                    `(printf "#file ~a is not a #lang file\n" ',name))]))))))
+                    `(eprintf "#file ~a is not a #lang file\n" ',name))]))))))
 
 ;; file-decl-line?
 (module+ test
