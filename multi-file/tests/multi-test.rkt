@@ -13,3 +13,8 @@
 x
 (f x)
 (value-contract f)
+#file c.txt
+I'm not code, I'm just text in a text file.
+#file d.rkt
+#lang racket/base
+(read-line (open-input-file "c.txt"))

@@ -5,6 +5,7 @@
 (require racket/match
          racket/list
          racket/string
+         (only-in lang-file/read-lang-file lang-file?)
          )
 (module+ test
   (require rackunit))
@@ -32,9 +33,13 @@
        ,@(append*
           (for/list ([p (in-list files-alist)])
             (match-define (cons name _) p)
-            (list
-             `(printf "#file ~a\n" ',name)
-             `(dynamic-require ',name #f)))))))
+            (cond [(lang-file? name)
+                   (list
+                    `(printf "#file ~a\n" ',name)
+                    `(dynamic-require ',name #f))]
+                  [else
+                   (list
+                    `(printf "#file ~a is not a #lang file\n" ',name))]))))))
 
 ;; file-decl-line?
 (module+ test
