@@ -1,6 +1,6 @@
 #lang scribble/manual
 
-@(require (for-label racket/base))
+@(require (for-label racket/base lang-file/read-lang-file))
 
 @title{multi-file-lang}
 
@@ -29,5 +29,9 @@ x
 }
 
 Would create the files a.rkt and b.rkt, and running this file would run both of them.
+
+If a sub-file is not a @hash-lang[] file (according to @racket[lang-file?]),
+@racketmodname[multi-file] does not run it, but it is still created so that
+other files can read from it.
 }
 
