@@ -10,9 +10,17 @@
 (module+ test
   (require rackunit))
 
+;; An [AssocMapping X Y] is a [Listof [Pair X Y]]
+;; interpretation
+;;   A mapping from Xs to Ys, where each X is associated with the Y in its
+;;   pair. For example in (list (cons 'a 1) (cons 'b 2)), 'a maps to 1 and
+;;   'b maps to 2.
+
+;; read : InputPort PosInt Nat PosInt -> ModuleSExpr
 (define (read in p ln col pos)
   (syntax->datum (read-syntax #f in p ln col pos)))
 
+;; read-syntax : Any InputPort PosInt Nat PosInt -> ModuleSyntax
 (define (read-syntax src in p ln col pos)
   (define lines
     (for/list ([line (in-lines in)])
@@ -41,7 +49,7 @@
                    (list
                     `(eprintf "#file ~a is not a #lang file\n" ',name))]))))))
 
-;; file-decl-line?
+;; file-decl-line? : String -> [Maybe String]
 (module+ test
   (check-equal? (file-decl-line? "#file a.rkt") "a.rkt")
   (check-equal? (file-decl-line? "#filea.rkt") #f)
@@ -53,7 +61,7 @@
        (string=? (substring line 0 len6) "#file ")
        (substring line len6)))
 
-;; group-lines
+;; group-lines : [Listof String] -> [AssocMapping String [Listof String]]
 (module+ test
   (check-equal? (group-lines (list "#file a.rkt"
                                    "first line"
