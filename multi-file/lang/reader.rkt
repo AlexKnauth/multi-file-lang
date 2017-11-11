@@ -41,7 +41,9 @@
        (define-values [ln* col* pos*] (port-next-location in))
        (loop (read-line in) ln* col* pos*
              (cons
-              (datum->syntax #f line (list src ln col pos (- pos* pos)))
+              (datum->syntax #f
+                             line
+                             (list src ln col pos (max 0 (- pos* pos))))
               acc))])))
 
 ;; file-decl-line? : StxString -> [Maybe StxString]
@@ -65,7 +67,7 @@
               (and (syntax-position line)
                    (+ (syntax-position line) len6))
               (and (syntax-span line)
-                   (- (syntax-span line) len6))))))
+                   (max 0 (- (syntax-span line) len6)))))))
 
 ;; group-lines :
 ;; [Listof StringSyntax] -> [AssocMapping StringSyntax [Listof String]]
