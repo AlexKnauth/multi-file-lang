@@ -39,7 +39,7 @@
       [(eof-object? line) (reverse acc)]
       [else
        (define-values [ln* col* pos*] (port-next-location in))
-       (loop (read-line in) ln* col* pos*
+       (loop (read-line in 'any) ln* col* pos*
              (cons
               (datum->syntax #f
                              line
