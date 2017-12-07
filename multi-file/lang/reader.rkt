@@ -34,7 +34,7 @@
 
 ;; read-syntax-lines : InputPort Any PosInt Nat PosInt -> [Listof StxString]
 (define (read-syntax-lines in src ln col pos)
-  (let loop ([line (read-line in)] [ln ln] [col col] [pos pos] [acc '()])
+  (let loop ([line (read-line in 'any)] [ln ln] [col col] [pos pos] [acc '()])
     (cond
       [(eof-object? line) (reverse acc)]
       [else
