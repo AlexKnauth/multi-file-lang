@@ -5,6 +5,7 @@
 
 (require syntax/parse/define
          (only-in lang-file/read-lang-file lang-file?)
+         "private/make-parent-directory.rkt"
          (for-syntax racket/base
                      syntax/path-spec))
 
@@ -23,6 +24,7 @@
 
 ;; write-file : String Path String -> Void
 (define (write-file name path contents)
+  (make-parent-directory* path)
   (call-with-output-file* path #:exists 'replace
     (λ (out)
       (void (write-string contents out)))))
